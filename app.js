@@ -327,9 +327,9 @@ app.post(
   uploads.array("files", 3),
   function async(req, res) {
     const file = req.files;
-    const fileCount = 0;
+    let fileCount = 0;
 
-    const isUserExists = true;
+    let isUserExists = true;
 
     const sql = "SELECT * FROM Users WHERE Id = ?";
     db.all(sql, req.body.UserId, (err, rows) => {
@@ -338,7 +338,7 @@ app.post(
         return;
       }
 
-      const isUserExists = rows.length > 0 ? true : false;
+      isUserExists = rows.length > 0 ? true : false;
 
       if (isUserExists) {
         const dir = `./images/${req.body.UserId}/`;
